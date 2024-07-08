@@ -50,4 +50,10 @@ public class UserController {
         userService.deleteUser(id);
         return ResponseEntity.noContent().build();
     }
+
+    @PostMapping("/createrandomuser")
+    public ResponseEntity<User> createRandomUser(){
+        return ResponseEntity.ok(userService.createRandomUser());
+    }
+
 }
