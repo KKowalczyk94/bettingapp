@@ -24,8 +24,21 @@ spring:
                     github:
                         client-id: Ov23liANJtlptzOkcnEb
                         client-secret: 37967d4b2345ae2be6fe7428b7ed69d7055c4f73
-#logging:
-#    level:
-#        org:
-#            springframework:
-#                security=TRACE: #GitHub Login
+logging:
+    level:
+        org:
+            springframework:
+                security: TRACE #GitHub Login
+management:
+    endpoints:
+        web:
+            exposure:
+                include: health, info
+    info:
+        env:
+            enabled: true
+info:
+    app:
+        name: bettingapp
+        description: app to place bets
+        version: 1.0
