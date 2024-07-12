@@ -1,4 +1,4 @@
-package com.example.demo.controllers;
+package com.example.demo.controllers.impl;
 
 import com.example.demo.Entities.User;
 import com.example.demo.services.UserService;
@@ -55,5 +55,4 @@ public class UserController {
     public ResponseEntity<User> createRandomUser(){
         return ResponseEntity.ok(userService.createRandomUser());
     }
-
 }
