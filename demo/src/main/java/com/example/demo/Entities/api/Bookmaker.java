@@ -2,6 +2,7 @@ package com.example.demo.Entities.api;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import org.hibernate.annotations.GenericGenerator;
 
 import java.util.List;
 import java.util.UUID;
@@ -11,9 +12,11 @@ import java.util.UUID;
 public class Bookmaker {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(generator = "UUID")
+    @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
     private UUID id;
 
+    @Column(name = "bookmaker_key")
     private String key;
     private String title;
     private String lastUpdate;

@@ -1,10 +1,8 @@
 package com.example.demo.Entities.api;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.Data;
+import org.hibernate.annotations.GenericGenerator;
 
 import java.util.UUID;
 
@@ -13,11 +11,15 @@ import java.util.UUID;
 public class Sport {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(generator = "UUID")
+    @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
     private UUID id;
 
+    @Column(name = "sport_key")
     private String key;
     private boolean active;
+
+    @Column(name = "sport_group")
     private String group;
     private String description;
     private String title;

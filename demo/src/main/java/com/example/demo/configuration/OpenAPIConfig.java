@@ -2,6 +2,7 @@ package com.example.demo.configuration;
 
 import io.swagger.v3.oas.models.OpenAPI;
 import io.swagger.v3.oas.models.info.Info;
+import okhttp3.OkHttpClient;
 import org.springdoc.core.models.GroupedOpenApi;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -30,5 +31,10 @@ public class OpenAPIConfig {
     @Bean
     public RestTemplate restTemplate() {
         return new RestTemplate();
+    }
+
+    @Bean
+    public OkHttpClient okHttpClient() {
+        return new OkHttpClient.Builder().build();
     }
 }
