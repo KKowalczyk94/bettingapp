@@ -5,4 +5,4 @@ TODO
 In service use transfer objects DTO, RestTemplate in services and deserialise it to objects.
 
 Start front in React Function funkcyjne podejcie)
-Use Axios, store envarionment variables in properties
+Use Axios, store envarionment variables in properties (template OKar)
