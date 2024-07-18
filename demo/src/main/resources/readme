@@ -3,6 +3,10 @@ https://rapidapi.com/theoddsapi/api/live-sports-odds/playground/apiendpoint_6032
 
 TODO
 In service use transfer objects DTO, RestTemplate in services and deserialise it to objects.
+Set CORS origin on the backend side (so that backend and frontend can communicate)
+
 
 Start front in React Function funkcyjne podejcie)
 Use Axios, store envarionment variables in properties (template OKar)
+https://github.com/JaRutkowski/jfs-okr
+Use bootstrap 
