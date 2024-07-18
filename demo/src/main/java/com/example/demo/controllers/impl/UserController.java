@@ -1,6 +1,6 @@
 package com.example.demo.controllers.impl;
 
-import com.example.demo.Entities.User;
+import com.example.demo.Entities.user.User;
 import com.example.demo.services.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;

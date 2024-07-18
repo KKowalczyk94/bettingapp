@@ -42,3 +42,8 @@ info:
         name: bettingapp
         description: app to place bets
         version: 1.0
+api:
+    rapidapi:
+        key: 11e4a7c2d8mshdb6fe70382b7851p1b726cjsnfcd5ff9d290c
+        host: odds.p.rapidapi.com
+        base-url: https://odds.p.rapidapi.com/v4

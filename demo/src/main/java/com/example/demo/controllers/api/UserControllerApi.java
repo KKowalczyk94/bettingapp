@@ -1,6 +1,6 @@
 package com.example.demo.controllers.api;
 
-import com.example.demo.Entities.User;
+import com.example.demo.Entities.user.User;
 import org.springframework.http.ResponseEntity;
 
 import java.util.List;

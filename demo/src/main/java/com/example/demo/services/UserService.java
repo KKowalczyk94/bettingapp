@@ -2,10 +2,9 @@ package com.example.demo.services;
 
 import com.example.demo.Entities.ActionItem;
 import com.example.demo.Entities.Bet;
-import com.example.demo.Entities.User;
+import com.example.demo.Entities.user.User;
 import com.example.demo.repositories.UserRepository;
 import com.github.javafaker.Faker;
-import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;

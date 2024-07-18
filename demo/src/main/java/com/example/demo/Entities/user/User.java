@@ -1,5 +1,6 @@
-package com.example.demo.Entities;
+package com.example.demo.Entities.user;
 
+import com.example.demo.Entities.Bet;
 import jakarta.persistence.*;
 
 import java.util.List;
