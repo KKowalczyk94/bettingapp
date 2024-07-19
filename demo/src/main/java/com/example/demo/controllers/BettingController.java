@@ -4,6 +4,7 @@ package com.example.demo.controllers;
 import com.example.demo.Entities.api.Event;
 import com.example.demo.Entities.api.Sport;
 import com.example.demo.Entities.dtos.EventDTO;
+import com.example.demo.Entities.dtos.EventWithScoresDTO;
 import com.example.demo.Entities.dtos.SportDTO;
 import com.example.demo.services.BettingService;
 import lombok.RequiredArgsConstructor;
@@ -44,9 +45,9 @@ public class BettingController {
     }
 
     @GetMapping("/scores/{sport}")
-    public ResponseEntity<List<Event>> getScores(@PathVariable String sport) {
+    public ResponseEntity<List<EventWithScoresDTO>> getScores(@PathVariable String sport) {
         try {
-            List<Event> events = bettingService.getScores(sport);
+            List<EventWithScoresDTO> events = bettingService.getScores(sport);
             return ResponseEntity.ok(events);
         } catch (Exception e) {
             return ResponseEntity.status(500).body(null);

@@ -11,12 +11,14 @@ import java.util.UUID;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class EventDTO {
+public class EventWithScoresDTO {
     private UUID id;
     private String sportKey;
     private String sportTitle;
     private String commenceTime;
+    private boolean completed;
     private String homeTeam;
     private String awayTeam;
-    private List<BookmakerDTO> bookmakers;
+    private List<ScoresDTO> scores;
+    private String lastUpdate;
 }

@@ -1,8 +1,10 @@
 package com.example.demo.services;
 
 import com.example.demo.Entities.api.Event;
+import com.example.demo.Entities.api.EventWithScores;
 import com.example.demo.Entities.api.Sport;
 import com.example.demo.Entities.dtos.EventDTO;
+import com.example.demo.Entities.dtos.EventWithScoresDTO;
 import com.example.demo.Entities.dtos.SportDTO;
 import com.example.demo.converter.EntityToDTOConverter;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -79,9 +81,21 @@ public class BettingService {
         return events.stream().map(EntityToDTOConverter::toEventDTO).collect(Collectors.toList());
     }
 
-    public List<Event> getScores(String sport) throws Exception {
+    public List<EventWithScoresDTO> getScores(String sport) throws Exception {
         String url = baseUrl + "/sports/" + sport + "/scores?daysFrom=3";
-        String response = restTemplate.getForObject(url, String.class);
-        return objectMapper.readValue(response, new TypeReference<List<Event>>() {});
+        HttpHeaders headers = new HttpHeaders();
+        headers.set("x-rapidapi-key", apiKey);
+        headers.set("x-rapidapi-host", apiHost);
+        HttpEntity<String> entity = new HttpEntity<>(headers);
+
+        ResponseEntity<String> response = restTemplate.exchange(url, HttpMethod.GET, entity, String.class);
+
+        if (!response.getStatusCode().is2xxSuccessful()) {
+            throw new IOException("Unexpected code " + response.getStatusCode());
+        }
+
+        String responseBody = response.getBody();
+        List<EventWithScores> eventsWithScores = objectMapper.readValue(responseBody, new TypeReference<List<EventWithScores>>() {});
+        return eventsWithScores.stream().map(EntityToDTOConverter::toEventWithScoresDTO).collect(Collectors.toList());
     }
 }
