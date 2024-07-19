@@ -3,6 +3,8 @@ package com.example.demo.controllers;
 
 import com.example.demo.Entities.api.Event;
 import com.example.demo.Entities.api.Sport;
+import com.example.demo.Entities.dtos.EventDTO;
+import com.example.demo.Entities.dtos.SportDTO;
 import com.example.demo.services.BettingService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -22,9 +24,9 @@ public class BettingController {
     private final BettingService bettingService;
 
     @GetMapping("/sports")
-    public ResponseEntity<List<Sport>> getSports() {
+    public ResponseEntity<List<SportDTO>> getSports() {
         try {
-            List<Sport> sports = bettingService.getSports();
+            List<SportDTO> sports = bettingService.getSports();
             return ResponseEntity.ok(sports);
         } catch (Exception e) {
             return ResponseEntity.status(500).body(null);
@@ -32,9 +34,9 @@ public class BettingController {
     }
 
     @GetMapping("/odds/{sport}")
-    public ResponseEntity<List<Event>> getOdds(@PathVariable String sport) {
+    public ResponseEntity<List<EventDTO>> getOdds(@PathVariable String sport) {
         try {
-            List<Event> events = bettingService.getOdds(sport);
+            List<EventDTO> events = bettingService.getOdds(sport);
             return ResponseEntity.ok(events);
         } catch (Exception e) {
             return ResponseEntity.status(500).body(null);
