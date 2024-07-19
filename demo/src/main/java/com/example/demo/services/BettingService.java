@@ -7,10 +7,16 @@ import lombok.RequiredArgsConstructor;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
+import okio.BufferedSource;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import com.fasterxml.jackson.core.type.TypeReference;
+
 
 import java.io.IOException;
 import java.util.List;
@@ -32,23 +38,45 @@ public class BettingService {
     private final OkHttpClient client;
     private final RestTemplate restTemplate;
 
-    public List<Sport> getSports() throws Exception {
-//        String url = baseUrl + "/sports?all=true";
+    public List<Sport> getSports() throws IOException {
+        String url = baseUrl + "/sports?all=true";
+        HttpHeaders headers = new HttpHeaders();
+        headers.set("x-rapidapi-key", apiKey);
+        headers.set("x-rapidapi-host", apiHost);
+        HttpEntity<String> entity = new HttpEntity<>(headers);
+
+        ResponseEntity<String> response = restTemplate.exchange(url, HttpMethod.GET, entity, String.class);
+
+        if (!response.getStatusCode().is2xxSuccessful()) {
+            throw new IOException("Unexpected code " + response.getStatusCode());
+        }
+
+        String responseBody = response.getBody();
+        return objectMapper.readValue(responseBody, new TypeReference<List<Sport>>() {});
+    }
+
+
+        //        String url = baseUrl + "/sports?all=true";
 //        String response = restTemplate.getForObject(url, String.class);
 //        return objectMapper.readValue(response, new TypeReference<List<Sport>>() {});
-        Request request = new Request.Builder()
-                .url("https://odds.p.rapidapi.com/v4/sports?all=true")
-                .get()
-                .addHeader("x-rapidapi-key", apiKey)
-                .addHeader("x-rapidapi-host", apiHost)
-                .build();
-        try(Response response = client.newCall(request).execute()){
-            if (!response.isSuccessful()){
-                throw new IOException("Unexpected code " + response);
-            }
-            return objectMapper.readValue(response.body().string(), new TypeReference<List<Sport>>() {});
-        }
-    }
+
+
+
+//        Request request = new Request.Builder()
+//                .url("https://odds.p.rapidapi.com/v4/sports?all=true")
+//                .get()
+//                .addHeader("x-rapidapi-key", apiKey)
+//                .addHeader("x-rapidapi-host", apiHost)
+//                .build();
+//        try(Response response = client.newCall(request).execute()){
+//            if (!response.isSuccessful()){
+//                throw new IOException("Unexpected code " + response);
+//            }
+//            assert response.body() != null;
+//            String responseBody = response.body().string();
+//            return objectMapper.readValue(responseBody, new TypeReference<List<Sport>>() {});
+//        }
+
 
     public List<Event> getOdds(String sport) throws Exception {
         String url = baseUrl + "/sports/" + sport + "/odds?regions=us&oddsFormat=decimal&markets=h2h&dateFormat=iso";

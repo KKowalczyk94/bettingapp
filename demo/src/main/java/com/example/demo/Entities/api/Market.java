@@ -1,5 +1,6 @@
 package com.example.demo.Entities.api;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import lombok.Data;
 import org.hibernate.annotations.GenericGenerator;
@@ -16,6 +17,7 @@ public class Market {
     @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
     private UUID id;
 
+    @JsonProperty("key")
     @Column(name = "market_key")
     private String key;
 

@@ -1,5 +1,6 @@
 package com.example.demo.Entities.api;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import lombok.Data;
 import org.hibernate.annotations.GenericGenerator;
@@ -16,9 +17,14 @@ public class Bookmaker {
     @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
     private UUID id;
 
+    @JsonProperty("key")
     @Column(name = "bookmaker_key")
     private String key;
+
+    @JsonProperty("title")
     private String title;
+
+    @JsonProperty("last_update")
     private String lastUpdate;
 
     @ManyToOne
